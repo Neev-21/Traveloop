@@ -29,7 +29,7 @@ function ResetPasswordPage() {
     <div className="min-h-screen grid place-items-center bg-mesh p-6">
       <form onSubmit={submit} className="w-full max-w-md glass-strong rounded-3xl p-8 shadow-soft">
         <div className="flex items-center gap-2 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-primary grid place-items-center"><Compass className="w-5 h-5 text-primary-foreground" /></div>
+          <img src="/favicon.png" alt="Traveloop" className="w-10 h-10 rounded-xl object-contain" />
           <span className="text-2xl font-bold">Traveloop</span>
         </div>
         <h1 className="text-2xl font-bold">Set a new password</h1>

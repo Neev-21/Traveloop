@@ -35,9 +35,7 @@ export function AppLayout({ children }: { children?: ReactNode }) {
       {/* Sidebar (desktop) */}
       <aside className="hidden md:flex w-64 flex-col glass-strong border-r p-4 sticky top-0 h-screen">
         <Link to="/" className="flex items-center gap-2 px-2 py-3 mb-4">
-          <div className="w-9 h-9 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
-            <Compass className="w-5 h-5 text-primary-foreground" />
-          </div>
+          <img src="/favicon.png" alt="Traveloop" className="w-9 h-9 rounded-xl object-contain shadow-glow" />
           <span className="text-xl font-bold tracking-tight">Traveloop</span>
         </Link>
         <nav className="flex-1 flex flex-col gap-1">
@@ -75,7 +73,7 @@ export function AppLayout({ children }: { children?: ReactNode }) {
         {/* Mobile top bar */}
         <header className="md:hidden flex items-center justify-between p-4 glass-strong sticky top-0 z-30">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary grid place-items-center"><Compass className="w-4 h-4 text-primary-foreground" /></div>
+            <img src="/favicon.png" alt="Traveloop" className="w-8 h-8 rounded-lg object-contain" />
             <span className="font-bold">Traveloop</span>
           </Link>
           <Avatar className="w-8 h-8"><AvatarImage src={user.avatar} /><AvatarFallback>A</AvatarFallback></Avatar>

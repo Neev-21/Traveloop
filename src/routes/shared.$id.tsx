@@ -30,7 +30,7 @@ function SharedTrip() {
       <header className="glass-strong border-b sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary grid place-items-center"><Compass className="w-4 h-4 text-primary-foreground" /></div>
+            <img src="/favicon.png" alt="Traveloop" className="w-8 h-8 rounded-lg object-contain" />
             <span className="font-bold">Traveloop</span>
           </Link>
           <Link to="/create"><Button size="sm" className="bg-gradient-primary">Copy Trip</Button></Link>
