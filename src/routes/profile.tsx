@@ -63,6 +63,27 @@ function Profile() {
             ))}
             {user.saved.length === 0 && <p className="text-sm text-muted-foreground">No saved destinations yet.</p>}
           </div>
+
+          {/* Custom destination input */}
+          <div className="mt-4 flex gap-2">
+            <Input
+              id="custom-destination"
+              placeholder="Add any destination (e.g. Shimla, Coorg…)"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const val = (e.target as HTMLInputElement).value.trim();
+                  if (val && !user.saved.includes(val)) { toggleSaved(val); (e.target as HTMLInputElement).value = ''; }
+                }
+              }}
+              className="flex-1"
+            />
+            <Button type="button" size="sm" variant="outline" onClick={(e) => {
+              const input = (e.currentTarget.previousSibling as HTMLInputElement);
+              const val = input.value.trim();
+              if (val && !user.saved.includes(val)) { toggleSaved(val); input.value = ''; }
+            }}>+ Add</Button>
+          </div>
+
           <div className="mt-5">
             <p className="text-xs text-muted-foreground mb-2">Add from popular destinations</p>
             <div className="flex flex-wrap gap-2">

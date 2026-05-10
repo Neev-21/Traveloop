@@ -40,8 +40,22 @@ function BuildPage() {
   };
 
   return (
-    <div className="grid lg:grid-cols-[1fr_360px] gap-6">
-      <div className="space-y-4">
+    <div className="flex flex-col lg:grid lg:grid-cols-[1fr_360px] gap-6">
+      {/* Add a Stop panel — shown at top on mobile, right side on desktop */}
+      <aside className="lg:order-2 rounded-2xl glass-strong p-5 h-fit lg:sticky lg:top-6">
+        <h3 className="font-bold">Add a Stop</h3>
+        <p className="text-xs text-muted-foreground">Search a city, set dates, then add to itinerary.</p>
+        <Button onClick={() => setCityOpen(true)} variant="outline" className="w-full mt-3">
+          <MapPin className="w-4 h-4" /> {pendingCity ? `${pendingCity.name}, ${pendingCity.country}` : 'Search Cities'}
+        </Button>
+        <div className="grid grid-cols-2 gap-2 mt-3">
+          <Input type="date" value={dates.start} onChange={(e) => setDates((p) => ({ ...p, start: e.target.value }))} />
+          <Input type="date" value={dates.end} onChange={(e) => setDates((p) => ({ ...p, end: e.target.value }))} />
+        </div>
+        <Button onClick={onAddStop} className="w-full mt-3 bg-gradient-primary"><Plus className="w-4 h-4" /> Add to Trip</Button>
+      </aside>
+
+      <div className="lg:order-1 space-y-4">
         {sorted.length === 0 && (
           <div className="rounded-2xl border-2 border-dashed p-12 text-center">
             <MapPin className="w-10 h-10 text-muted-foreground mx-auto" />
@@ -84,19 +98,6 @@ function BuildPage() {
           </div>
         ))}
       </div>
-
-      <aside className="rounded-2xl glass-strong p-5 h-fit lg:sticky lg:top-6">
-        <h3 className="font-bold">Add a Stop</h3>
-        <p className="text-xs text-muted-foreground">Search a city, set dates, then add to itinerary.</p>
-        <Button onClick={() => setCityOpen(true)} variant="outline" className="w-full mt-3">
-          <MapPin className="w-4 h-4" /> {pendingCity ? `${pendingCity.name}, ${pendingCity.country}` : 'Search Cities'}
-        </Button>
-        <div className="grid grid-cols-2 gap-2 mt-3">
-          <Input type="date" value={dates.start} onChange={(e) => setDates((p) => ({ ...p, start: e.target.value }))} />
-          <Input type="date" value={dates.end} onChange={(e) => setDates((p) => ({ ...p, end: e.target.value }))} />
-        </div>
-        <Button onClick={onAddStop} className="w-full mt-3 bg-gradient-primary"><Plus className="w-4 h-4" /> Add to Trip</Button>
-      </aside>
 
       <CitySearchDialog open={cityOpen} onOpenChange={setCityOpen} onPick={setPendingCity} />
       <ActivitySearchDialog

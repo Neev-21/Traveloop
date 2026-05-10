@@ -57,6 +57,9 @@ function CreateTrip() {
           </div>
           <div>
             <Label className="flex items-center gap-1"><ImageIcon className="w-4 h-4" /> Cover Photo</Label>
+            {/* Preview */}
+            {cover && <img src={cover} alt="cover preview" className="mt-2 w-full h-32 object-cover rounded-xl mb-2" onError={(e) => (e.currentTarget.style.display = 'none')} />}
+            {/* Preset thumbnails */}
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-2">
               {POPULAR_CITIES.slice(0, 6).map((c) => (
                 <button type="button" key={c.name} onClick={() => setCover(c.image)} className={`relative aspect-square rounded-xl overflow-hidden ring-2 transition-all ${cover === c.image ? 'ring-primary shadow-glow' : 'ring-transparent'}`}>
@@ -64,6 +67,24 @@ function CreateTrip() {
                 </button>
               ))}
             </div>
+            {/* Custom URL */}
+            <div className="mt-3 flex gap-2">
+              <Input
+                id="cover-url"
+                placeholder="Or paste an image URL…"
+                onBlur={(e) => { if (e.target.value.trim()) setCover(e.target.value.trim()); }}
+                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); const v = (e.target as HTMLInputElement).value.trim(); if (v) setCover(v); } }}
+                className="flex-1 text-sm"
+              />
+            </div>
+            {/* File upload */}
+            <label className="mt-2 flex items-center gap-2 cursor-pointer text-sm text-muted-foreground hover:text-foreground">
+              <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) { const url = URL.createObjectURL(file); setCover(url); }
+              }} />
+              <span className="px-3 py-1.5 rounded-lg border text-xs hover:bg-secondary transition-colors">📁 Upload from device</span>
+            </label>
           </div>
           <div className="flex gap-2 pt-2">
             <Button type="button" variant="outline" onClick={() => navigate({ to: '/trips' })}>Cancel</Button>
